@@ -1,0 +1,7 @@
+{
+  "model": "qwen3:30b-a3b-instruct-2507-q4_K_M",
+  "messages": [
+    { "role": "system", "content": "You are a concise assistant." },
+    { "role": "user", "content": "What is the capital of France?" }
+  ]
+}

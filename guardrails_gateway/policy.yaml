@@ -1,0 +1,44 @@
+# guardrails-gateway default policy (deterministic, config-driven).
+# Edit this file (or point GATEWAY_POLICY at your own) to tune behaviour.
+# These are HEURISTIC defenses, not a guarantee.
+
+pii:
+  # PII types to detect + redact in input. Supported: email, phone,
+  # credit_card (Luhn-validated), ssn, ip.
+  redact: [email, phone, credit_card, ssn, ip]
+  # Block the response if any PII leaks back out in the model output.
+  block_on_output_leak: true
+
+injection:
+  block: true
+  # Prompt-injection / jailbreak heuristics (case-insensitive substring match).
+  phrases:
+    - "ignore previous instructions"
+    - "ignore all previous instructions"
+    - "disregard previous instructions"
+    - "disregard all prior instructions"
+    - "reveal your system prompt"
+    - "show me your system prompt"
+    - "print your system prompt"
+    - "you are now"
+    - "pretend you are"
+    - "act as if"
+    - "developer mode"
+    - "do anything now"
+    - "dan mode"
+    - "jailbreak"
+
+banned_topics:
+  block: true
+  # Configurable blocklist keywords (case-insensitive). Sample values only.
+  keywords:
+    - "build a bomb"
+    - "make a bomb"
+    - "synthesize a nerve agent"
+    - "credit card skimmer"
+    - "insider trading tips"
+
+output:
+  # Refuse responses longer than this many characters.
+  max_length: 16000
+  # Secret egress (private key headers, OpenAI/AWS key shapes) is always checked.

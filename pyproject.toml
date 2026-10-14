@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "guardrails-gateway"
+version = "0.1.0"
+description = "Drop-in safety proxy that enforces input + output guardrails in front of any OpenAI-compatible LLM endpoint."
+authors = [{ name = "Al Amin Bashir Afara", email = "aminafara123@gmail.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["llm", "security", "guardrails", "pii", "prompt-injection", "fastapi", "proxy"]
+dependencies = [
+    "fastapi>=0.110,<1",
+    "uvicorn>=0.27,<1",
+    "pydantic>=2.5,<3",
+    "pyyaml>=6,<7",
+    "httpx>=0.26,<1",
+    "jsonschema>=4,<5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+guardrails-gateway = "guardrails_gateway.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["guardrails_gateway"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"guardrails_gateway/policy.yaml" = "guardrails_gateway/policy.yaml"

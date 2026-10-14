@@ -1,0 +1,7 @@
+fastapi>=0.110,<1
+uvicorn>=0.27,<1
+pydantic>=2.5,<3
+pyyaml>=6,<7
+httpx>=0.26,<1
+jsonschema>=4,<5
+pytest>=8,<9
